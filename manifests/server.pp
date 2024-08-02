@@ -176,6 +176,10 @@ class postfix::server (
   
 ) inherits ::postfix::params {
 
+  $explicit_myorigin = '$myhostname'
+
+  notify { "explicit_myorigin is: ${explicit_myorigin}": }
+
   notify { "myorigin is: ${myorigin}": }
 
   # Main package and service it provides
