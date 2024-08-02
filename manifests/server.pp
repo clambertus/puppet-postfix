@@ -180,7 +180,7 @@ class postfix::server (
 
   notify { "explicit_myorigin is: ${explicit_myorigin}": }
 
-  notify { "myorigin is: ${myorigin}": }
+  notify { "myorigin is: ${postfix::server::myorigin}": }
 
   # Main package and service it provides
   if $mysql {
