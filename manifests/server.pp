@@ -176,6 +176,8 @@ class postfix::server (
   
 ) inherits ::postfix::params {
 
+  notify { "myorigin is: ${myorigin}": }
+
   # Main package and service it provides
   if $mysql {
     $package_name = $postfix_mysql_package
