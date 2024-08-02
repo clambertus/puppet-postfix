@@ -13,7 +13,7 @@ class postfix::server (
   # See the main.cf comments for help on these options
   $myhostname = $facts['networking']['fqdn'],
   $mydomain = false,
-  $myorigin = '$myhostname',
+  String $myorigin = '$myhostname',
   $inet_interfaces = 'localhost',
   $inet_protocols = 'all',
   $proxy_interfaces = false,
@@ -179,8 +179,7 @@ class postfix::server (
   $explicit_myorigin = '$myhostname'
 
   notify { "explicit_myorigin is: ${explicit_myorigin}": }
-
-  notify { "myorigin is: ${postfix::server::myorigin}": }
+  notify { "myorigin is: ${myorigin}": }
 
   # Main package and service it provides
   if $mysql {
