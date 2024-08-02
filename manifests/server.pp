@@ -204,7 +204,7 @@ class postfix::server (
     require => Package[$package_name],
   }
   file { "${config_directory}/main.cf":
-    content => template("postfix/main.cf${filesuffix}.erb", { 'myorigin' => $myorigin } ),
+    content => template("postfix/main.cf${filesuffix}.erb"),
     notify  => Service['postfix'],
     require => Package[$package_name],
   }
