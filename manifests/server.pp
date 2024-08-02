@@ -13,7 +13,7 @@ class postfix::server (
   # See the main.cf comments for help on these options
   $myhostname = $facts['networking']['fqdn'],
   $mydomain = false,
-  String $myorigin = 'myhostname',
+  $myorigin = '$myhostname',
   $inet_interfaces = 'localhost',
   $inet_protocols = 'all',
   $proxy_interfaces = false,
@@ -204,7 +204,7 @@ class postfix::server (
     require => Package[$package_name],
   }
   file { "${config_directory}/main.cf":
-    content => template("postfix/main.cf${filesuffix}.erb"),
+    content => template("postfix/main.cf${filesuffix}.erb", { 'myorigin' => $myorigin } ),
     notify  => Service['postfix'],
     require => Package[$package_name],
   }
