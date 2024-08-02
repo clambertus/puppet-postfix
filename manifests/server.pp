@@ -176,13 +176,6 @@ class postfix::server (
   
 ) inherits ::postfix::params {
 
-  # Default has el5 files, for el6 a few defaults have changed
-  if ( $::operatingsystem =~ /RedHat|CentOS/ and versioncmp($::operatingsystemrelease, '6') < 0 ) {
-    $filesuffix = '-el5'
-  } else {
-    $filesuffix = ''
-  }
-
   # Main package and service it provides
   if $mysql {
     $package_name = $postfix_mysql_package
@@ -268,14 +261,7 @@ class postfix::server (
   }
 
   logrotate::rule { 'postfix':
-    path          => $postfix_logrotate_path,
-    rotate        => $postfix_logrotate_rotate,
-    rotate_every  => $postfix_logrotate_rotate_every,
-    compress      => $postfix_logrotate_compress,
-    delaycompress => $postfix_logrotate_delaycompress,
-    missingok     => $postfix_logrotate_missingok,
-    sharedscripts => $postfix_logrotate_sharedscripts,
-    postrotate    => $postfix_logrotate_postrotate,
+    ensure => absent,
   }
 
 }
